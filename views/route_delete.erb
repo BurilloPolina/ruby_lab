@@ -1,0 +1,33 @@
+<form method="post">
+  <div class="grid-x grid-padding-x">
+    <h3 class="cell">Delete route №<%= @route.number %></h3>
+
+    <div class="medium-10 cell">
+      <label>Choose a new bus route
+        <select name='number_route'>
+          <% @route_list.each do |l_route| %>
+            <% if @route.number != l_route.number %>
+              <option value = <%= l_route.number %> > <%= l_route.number %> </option>
+            <% else %>
+              <% next %>
+            <% end %>
+          <% end %>
+        </select>
+      </label>
+    </div>
+
+    <div class="medium-10 cell">
+      <label>Choose a new bus status
+        <select name='status'>
+          <% @status_list.each do |status| %>
+            <option value = <%= status %> > <%= status %> </option>
+          <% end %>
+        </select>
+      </label>
+    </div>
+
+    <div class="cell">
+      <input type="submit" value="Delete route" class="button alert">
+    </div>
+  </div>
+</form>

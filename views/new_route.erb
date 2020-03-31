@@ -1,0 +1,42 @@
+<form method="post">
+  <div class="grid-x grid-padding-x">
+    <h3 class="cell">Enter data to add a new route</h3>
+
+    <% if @errors && !@errors.empty? %>
+      <div class="callout alert cell">
+        <h5>Data entry error</h5>
+        <% @errors.each do |error|%>
+          <p><%= error %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="medium-10 cell">
+      <label>Route number
+        <input type="number" placeholder="1" name="number">
+      </label>
+    </div>
+
+    <div class="medium-10 cell">
+      <label>Route length
+        <input type="number" placeholder="2" name="length">
+      </label>
+    </div>
+
+    <div class="medium-10 cell">
+      <label>Required number of buses
+        <input type="number" placeholder="3" name="number_of_buses">
+      </label>
+    </div>
+
+    <div class="medium-10 cell">
+      <label>Number of stops
+        <input type="number" placeholder="4" name="number_of_stops">
+      </label>
+    </div>
+
+    <div class="cell">
+      <input type="submit" value="Add new route" class="button success">
+    </div>
+  </div>
+</form>

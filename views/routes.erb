@@ -1,0 +1,25 @@
+<div class="grid-x grid-padding-x">
+  <div class="cell">
+    <a href="/routes/new" class="button primary">Add route</a>
+  </div>
+
+  <h5 class="cell">Route list</h5>
+
+  <% @route_list.each.with_index do |route, index| %>
+    <div class="large-1 cell">
+      <%= index + 1 %>
+    </div>
+
+    <div class="large-9 cell">
+      <%= route %>
+    </div>
+
+    <div class="large-1 cell">
+      <a id="route-<%= route.number %>" href="/routes/bus_list/<%= route.number %>">More</a>
+    </div>
+
+    <div class="large-1 cell">
+      <a id="delete-<%= route.number %>" href="/routes/delete/<%= route.number %>">Delete</a>
+    </div>
+  <% end %>
+</div>

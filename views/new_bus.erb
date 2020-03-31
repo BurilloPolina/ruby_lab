@@ -1,0 +1,62 @@
+<form method="post">
+  <div class="grid-x grid-padding-x">
+    <h3 class="cell">Enter data to add a new bus</h3>
+
+    <% if @errors && !@errors.empty? %>
+      <div class="callout alert cell">
+        <h5>Data entry error</h5>
+        <% @errors.each do |error|%>
+          <p><%= error %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="medium-10 cell">
+      <label>Bus number
+        <input type="number" placeholder="10" name="number_bus" required>
+      </label>
+    </div>
+
+    <div class="medium-10 cell">
+      <label>Route number
+        <select name='number_route'>
+          <% @route_list.each do |route| %>
+            <option value = <%= route.number %> > <%= route.number %> </option>
+          <% end %>
+        </select>
+      </label>
+    </div>
+
+    <div class="medium-10 cell">
+      <label>First name
+        <input type="text" placeholder="Ivan" name="first_name" required>
+      </label>
+    </div>
+
+    <div class="medium-10 cell">
+      <label>Last name
+        <input type="text" placeholder="Ivanov" name="last_name" required>
+      </label>
+    </div>
+
+    <div class="medium-10 cell">
+      <label>Petrol consumption
+        <input type="text" pattern="^[0-9]+\.[0-9]+$" placeholder="3.4" name="petrol" required>
+      </label>
+    </div>
+
+    <div class="medium-10 cell">
+      <label>Status
+        <select name='status'>
+          <% @status_list.each do |status| %>
+            <option value = <%= status %> > <%= status %> </option>
+          <% end %>
+        </select>
+      </label>
+    </div>
+
+    <div class="cell">
+      <input type="submit" value="Add new bus" class="button success">
+    </div>
+  </div>
+</form>

@@ -1,0 +1,22 @@
+<div class="grid-x grid-padding-x">
+  <div class="cell">
+    <a href="/bus/new" class="button primary">Add bus</a>
+  </div>
+
+  <h5 class="cell">Bus list</h5>
+
+  <% @bus_list.each.with_index do |bus, index| %>
+    <div class="large-1 cell">
+      <%= index + 1 %>
+    </div>
+    <div class="large-9 cell">
+      <%= bus %>
+    </div>   
+    <div class="large-1 cell">
+      <a id="set-bus-<%= bus.number_bus %>" href="/bus/params/<%= bus.number_bus %>">Change</a>
+    </div>
+    <div class="large-1 cell">
+      <a id="delete-bus-<%= bus.number_bus %>" href="/bus/delete/<%= bus.number_bus %>">Delete</a>
+    </div>
+  <% end %>
+</div>

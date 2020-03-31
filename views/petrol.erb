@@ -1,0 +1,16 @@
+<div class="grid-x grid-padding-x">
+  <h5 class="cell">Petrol consumption statistics</h5>
+
+  <div class="callout primary cell">
+    <h5>Total petrol consumption on all routes: <%= @bus_list.calculate_petrol_cost(@route_list) %></h5>
+  </div>
+
+  <% @route_list.each do |route| %>
+    <div class="large-9 cell">
+      <p><%= route %></p>
+    </div>
+    <div class="large-3 cell">
+      <p>Petrol consumption: <%= @bus_list.route_petrol_cost(route) %></p>
+    </div>
+  <% end %>
+</div>

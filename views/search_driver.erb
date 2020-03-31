@@ -1,0 +1,28 @@
+<div class="grid-x grid-padding-x">
+  <form method="post" class="cell">  
+    <h5 class="cell">Search drivers</h5>
+
+    <div class="medium-10 cell">
+      <label>Last name
+          <input type="text" placeholder="Ivanov" name="last_name" required>
+      </label>
+      <input type="submit" value="Search" class="button success">
+    </div>  
+  </form>
+</div>
+
+<div class="grid-x grid-padding-x">
+  <h5 class="cell">Search results</h5>
+  <% if @find_drivers && !@find_drivers.empty? %>
+    <% @find_drivers.each do |driver|%>
+      <div class="large-6 cell">
+        <%= driver%>
+      </div>
+      <div class="large-6 cell">
+        <%= @route_list.find_route_by_number(driver.number_route) %>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="cell">Nothing found</p>
+  <% end %>
+</div>

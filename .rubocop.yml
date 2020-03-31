@@ -1,0 +1,13 @@
+AllCops:
+  TargetRubyVersion: 2.5
+Metrics/AbcSize:
+  Enabled: false
+Metrics/LineLength:
+  Max: 120
+Metrics/MethodLength:
+  Max: 15
+Metrics/BlockLength:
+  ExcludedMethods:
+    - RSpec.describe
+Style/NegatedIf:
+  Enabled: false

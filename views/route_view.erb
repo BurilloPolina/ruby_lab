@@ -1,0 +1,44 @@
+<div class="grid-x grid-padding-x">
+  <h5 class="cell">Buses on route №<%= @route.number %></h5>
+
+  <% if @buses_on_route >= @route.number_of_buses %>
+    <div class="callout success cell">
+      <h5>There are enough buses on this route!</h5>
+      <p><b>Need buses on the route: </b><%= @route.number_of_buses %></p>
+      <p><b>Buses are on route: </b><%= @buses_on_route %></p>
+    </div>
+  <% else %>
+    <div class="callout alert cell">
+      <h5>There are not enough buses on this route!</h5>
+      <p><b>Need buses on the route: </b><%= @route.number_of_buses %></p>
+      <p><b>Buses are on route: </b><%= @buses_on_route %></p>
+    </div>
+  <% end %>
+
+  <p class="cell"><b>Working buses:</b></p>
+  <% if @work_list.empty? %>
+    <p class="cell">No buses</p>
+  <% else %>
+    <% @work_list.each do |bus| %>
+      <p class="cell"><%= bus %></p>
+    <% end %>
+  <% end %>
+
+  <p class="cell"><b>Idle buses:</b></p>
+  <% if @stand_list.empty? %>
+    <p class="cell">No buses</p>
+  <% else %>
+    <% @stand_list.each do |bus| %>
+      <p class="cell"><%= bus %></p>
+    <% end %>
+  <% end %>
+
+  <p class="cell"><b>Buses in repair:</b></p>
+  <% if @repair_list.empty? %>
+    <p class="cell">No buses</p>
+  <% else %>
+    <% @repair_list.each do |bus| %>
+      <p class="cell"><%= bus %></p>
+    <% end %>
+  <% end %>
+</div>

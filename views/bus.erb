@@ -1,0 +1,37 @@
+<form method="post">
+  <div class="grid-x grid-padding-x">
+    <h3 class="cell">Change bus parameters #<%= params[:index] %></h3>
+    
+    <div class="medium-10 cell">
+      <label>Route number
+        <select name='number_route'>
+          <% @route_list.each do |route| %>
+            <% if @bus.number_route == route.number %>
+              <option value = <%= route.number %> selected> <%= route.number %> </option>
+            <% else %>
+              <option value = <%= route.number %> > <%= route.number %> </option>
+            <% end %>
+          <% end %>
+        </select>
+      </label>
+    </div>
+
+    <div class="medium-10 cell">
+      <label>Status
+        <select name='status'>
+          <% @status_list.each do |status| %>
+            <% if @bus.status == status %>
+              <option value = <%= status %> selected> <%= status %> </option>
+            <% else %>
+              <option value = <%= status %> > <%= status %> </option>
+            <% end %>
+          <% end %>
+        </select>
+      </label>
+    </div>
+
+    <div class="cell">
+      <input type="submit" value="Submit" class="button success">
+    </div>
+  </div>  
+</form>
