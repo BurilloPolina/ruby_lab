@@ -24,8 +24,8 @@ class Deploy
            create_app_user(APP_USER, APP_DIR)
            setup_systemd_service(APP_DIR)
            enable_systemd_service
+           restart_systemd_service
 	   install_nginx
-           # restart_systemd_service
         end
   end
 
