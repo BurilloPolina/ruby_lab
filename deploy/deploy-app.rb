@@ -9,7 +9,7 @@ require 'tmpdir'
 require 'optparse'
 
 REQUIRED_RUBY_VERSION='2.6.5'
-APP_DIR = File.expand_path('../', __FILE__)
+APP_DIR = File.expand_path('/srv/ruby_lab')
 SERVICE_NAME = 'application'
 APP_USER = 'ruby_lab'
 
@@ -75,6 +75,8 @@ class Deploy
   end
 
   def install_required_gems(application_directory)
+    gem_path = File.join(ruby_installation_path, 'gem')
+    checked_run('sudo', gem_path, 'install', 'bundler')
     checked_run('sudo', File.join(ruby_installation_path, 'bundle'),
                 'install', '--gemfile', File.join(application_directory, 'Gemfile'),
                 '--jobs=4', '--retry=3',
@@ -106,9 +108,9 @@ class Deploy
     File.write(file_path, baked_template)
 
     remote_service_file = '/tmp/systemd.service'
-    @scp.upload(file_path, remote_service_file)
+    @scp.upload!(file_path, remote_service_file)
 
-    hecked_run('sudo', 'mv', remote_service_file, 
+    checked_run('sudo', 'mv', remote_service_file, 
               File.join('/etc/systemd/system', "#{SERVICE_NAME}.service"))
     checked_run('sudo', 'systemctl', 'daemon-reload')
   end
@@ -134,9 +136,6 @@ class CommandLineParser
       option.on('-uUSER', "--user=USER", "User login for deploy") do |v|
         options[:user] = v
       end
-      option.on('-pPASSWORD', "--password=PASSWORD", "User password for deploy") do |v|
-        options[:password] = v
-      end
     end.parse!
     return options
   end
@@ -146,8 +145,11 @@ if __FILE__ == $0
   deployer = Deploy.new
   options = CommandLineParser.parse_options
   user = options[:user].nil? ? "user" : options[:user]
-  password = options[:password].nil? ? "user" : options[:password]
   host = options[:host].nil? ? "192.168.1.67" : options[:host]
+
+  puts 'Enter password: '
+  password = gets.chomp
+
   deployer.deploy(host, user, password)
 end
 
