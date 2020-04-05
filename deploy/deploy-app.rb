@@ -24,7 +24,8 @@ class Deploy
            create_app_user(APP_USER, APP_DIR)
            setup_systemd_service(APP_DIR)
            enable_systemd_service
-           restart_systemd_service
+	   install_nginx
+           # restart_systemd_service
         end
   end
 
@@ -122,6 +123,14 @@ class Deploy
   def restart_systemd_service
     checked_run('sudo', 'systemctl', 'restart', SERVICE_NAME)
   end
+
+  def install_nginx
+    checked_run('sudo', 'apt-get', 'install', 'nginx', '-y')
+    checked_run('sudo', 'cp', File.join(APP_DIR, 'deploy/ruby_lab'), '/etc/nginx/sites-available')
+    checked_run('sudo', 'rm', '-rf', '/etc/nginx/sites-enabled/*')
+    checked_run('sudo', 'ln', '/etc/nginx/sites-available/ruby_lab', '/etc/nginx/sites-enabled/ruby_lab')
+    checked_run('sudo', 'systemctl', 'restart', 'nginx')
+  end
 end
 
 
@@ -147,7 +156,8 @@ if __FILE__ == $0
   user = options[:user].nil? ? "user" : options[:user]
   host = options[:host].nil? ? "192.168.1.67" : options[:host]
 
-  puts 'Enter password: '
+  
+  puts "Enter password for #{user}@#{host}: "
   password = gets.chomp
 
   deployer.deploy(host, user, password)
