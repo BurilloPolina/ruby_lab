@@ -10,6 +10,8 @@ require_relative 'lib/validating'
 
 helpers Validating
 
+set :bind, '0.0.0.0'
+
 configure do
   set :bus_list, BusList.init_from_file
   set :route_list, RouteList.init_from_file
